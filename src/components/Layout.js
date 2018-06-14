@@ -10,6 +10,7 @@ import Typography from '@material-ui/core/Typography'
 import Button from '@material-ui/core/Button'
 import SearchIcon from '@material-ui/icons/Search'
 import { withStyles } from '@material-ui/core/styles'
+import PropTypes from 'prop-types'
 
 const styles = theme => ({
   list: {
@@ -51,9 +52,11 @@ const userInfo = (wrapper, avatar) => (
   </div>
 )
 
-const Layout = ({ children, classes: s }) => (
+const Layout = ({
+  children, classes: s, open, onDrawerClose,
+}) => (
   <div>
-    <Drawer open>
+    <Drawer open={open} onClose={onDrawerClose}>
       {userInfo(s.wrapper, s.avatar)}
       {list(s.list)}
     </Drawer>
@@ -63,5 +66,12 @@ const Layout = ({ children, classes: s }) => (
     </Button>
   </div>
 )
+
+Layout.propTypes = {
+  open: PropTypes.bool.isRequired,
+  classes: PropTypes.object.isRequired,
+  children: PropTypes.array.isRequired,
+  onDrawerClose: PropTypes.func.isRequired,
+}
 
 export default withStyles(styles)(Layout)
