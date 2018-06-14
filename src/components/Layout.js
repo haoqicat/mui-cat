@@ -9,9 +9,25 @@ import Avatar from '@material-ui/core/Avatar'
 import Typography from '@material-ui/core/Typography'
 import Button from '@material-ui/core/Button'
 import SearchIcon from '@material-ui/icons/Search'
+import { withStyles } from '@material-ui/core/styles'
 
-const list = (
-  <List>
+const styles = theme => ({
+  list: {
+    width: 304,
+  },
+  wrapper: {
+    textAlign: 'center',
+  },
+  avatar: {
+    width: 70,
+    height: 70,
+    margin: '8px auto',
+    marginTop: theme.spacing.unit * 4,
+  },
+})
+
+const list = className => (
+  <List className={className}>
     <ListItem button>
       <ListItemIcon>
         <InboxIcon />
@@ -27,19 +43,19 @@ const list = (
   </List>
 )
 
-const userInfo = (
-  <div>
-    <Avatar src="/img/peter.jpg" />
+const userInfo = (wrapper, avatar) => (
+  <div className={wrapper}>
+    <Avatar className={avatar} src="/img/peter.jpg" />
     <Typography variant="title">Peter</Typography>
     <Typography variant="caption">Linux Dev</Typography>
   </div>
 )
 
-const Layout = ({ children }) => (
+const Layout = ({ children, classes: s }) => (
   <div>
     <Drawer open>
-      {userInfo}
-      {list}
+      {userInfo(s.wrapper, s.avatar)}
+      {list(s.list)}
     </Drawer>
     {children}
     <Button variant="fab" color="primary">
@@ -48,4 +64,4 @@ const Layout = ({ children }) => (
   </div>
 )
 
-export default Layout
+export default withStyles(styles)(Layout)
