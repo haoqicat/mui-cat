@@ -25,6 +25,11 @@ const styles = theme => ({
     margin: '8px auto',
     marginTop: theme.spacing.unit * 4,
   },
+  fab: {
+    position: 'fixed',
+    bottom: theme.spacing.unit,
+    right: theme.spacing.unit,
+  },
 })
 
 const list = className => (
@@ -61,7 +66,7 @@ const Layout = ({
       {list(s.list)}
     </Drawer>
     {children}
-    <Button variant="fab" color="primary">
+    <Button variant="fab" color="primary" className={s.fab}>
       <SearchIcon />
     </Button>
   </div>
